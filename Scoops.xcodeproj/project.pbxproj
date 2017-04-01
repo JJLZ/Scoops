@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		429652BFB63ACCBB5B171712 /* Pods_Scoops.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */; };
 		882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A26491E8F41BC00D27BBB /* AppDelegate.swift */; };
 		882A264C1E8F41BC00D27BBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A264B1E8F41BC00D27BBB /* ViewController.swift */; };
 		882A264F1E8F41BC00D27BBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A264D1E8F41BC00D27BBB /* Main.storyboard */; };
 		882A26511E8F41BC00D27BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 882A26501E8F41BC00D27BBB /* Assets.xcassets */; };
 		882A26541E8F41BC00D27BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */; };
+		882A26621E8F489600D27BBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 882A26611E8F489600D27BBB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.release.xcconfig"; sourceTree = "<group>"; };
+		512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.debug.xcconfig"; sourceTree = "<group>"; };
 		882A26461E8F41BC00D27BBB /* Scoops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A26491E8F41BC00D27BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		882A264B1E8F41BC00D27BBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +27,8 @@
 		882A26501E8F41BC00D27BBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		882A26531E8F41BC00D27BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		882A26551E8F41BC00D27BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		882A26601E8F479A00D27BBB /* Scoops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Scoops-Bridging-Header.h"; sourceTree = "<group>"; };
+		882A26611E8F489600D27BBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429652BFB63ACCBB5B171712 /* Pods_Scoops.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +48,8 @@
 			children = (
 				882A26481E8F41BC00D27BBB /* Scoops */,
 				882A26471E8F41BC00D27BBB /* Products */,
+				BBD6A17E9FE23E2BCD4B2439 /* Pods */,
+				CC019E8FDFE113E6E42989F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +64,73 @@
 		882A26481E8F41BC00D27BBB /* Scoops */ = {
 			isa = PBXGroup;
 			children = (
-				882A26491E8F41BC00D27BBB /* AppDelegate.swift */,
-				882A264B1E8F41BC00D27BBB /* ViewController.swift */,
-				882A264D1E8F41BC00D27BBB /* Main.storyboard */,
-				882A26501E8F41BC00D27BBB /* Assets.xcassets */,
-				882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */,
-				882A26551E8F41BC00D27BBB /* Info.plist */,
+				882A265B1E8F45EA00D27BBB /* App Delegate */,
+				882A265D1E8F460500D27BBB /* Controller */,
+				882A265C1E8F45FE00D27BBB /* View */,
+				882A265E1E8F462600D27BBB /* Resources */,
 			);
 			path = Scoops;
+			sourceTree = "<group>";
+		};
+		882A265B1E8F45EA00D27BBB /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				882A26491E8F41BC00D27BBB /* AppDelegate.swift */,
+				882A265F1E8F463300D27BBB /* Supporting Files */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		882A265C1E8F45FE00D27BBB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				882A264D1E8F41BC00D27BBB /* Main.storyboard */,
+				882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		882A265D1E8F460500D27BBB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				882A264B1E8F41BC00D27BBB /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		882A265E1E8F462600D27BBB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				882A26501E8F41BC00D27BBB /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		882A265F1E8F463300D27BBB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				882A26611E8F489600D27BBB /* GoogleService-Info.plist */,
+				882A26601E8F479A00D27BBB /* Scoops-Bridging-Header.h */,
+				882A26551E8F41BC00D27BBB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BBD6A17E9FE23E2BCD4B2439 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */,
+				0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CC019E8FDFE113E6E42989F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +140,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 882A26581E8F41BC00D27BBB /* Build configuration list for PBXNativeTarget "Scoops" */;
 			buildPhases = (
+				5C3CC143C7E1328E209D5382 /* [CP] Check Pods Manifest.lock */,
 				882A26421E8F41BC00D27BBB /* Sources */,
 				882A26431E8F41BC00D27BBB /* Frameworks */,
 				882A26441E8F41BC00D27BBB /* Resources */,
+				EFE050C26558529A98D19EF3 /* [CP] Embed Pods Frameworks */,
+				DD48DDA2A9DF4DE6E4556E9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,12 +197,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				882A26541E8F41BC00D27BBB /* LaunchScreen.storyboard in Resources */,
+				882A26621E8F489600D27BBB /* GoogleService-Info.plist in Resources */,
 				882A26511E8F41BC00D27BBB /* Assets.xcassets in Resources */,
 				882A264F1E8F41BC00D27BBB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C3CC143C7E1328E209D5382 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DD48DDA2A9DF4DE6E4556E9F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scoops/Pods-Scoops-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFE050C26558529A98D19EF3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scoops/Pods-Scoops-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		882A26421E8F41BC00D27BBB /* Sources */ = {
@@ -259,6 +380,7 @@
 		};
 		882A26591E8F41BC00D27BBB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 69A85A3TC3;
@@ -266,12 +388,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emprendesoft.Scoops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Scoops/Scoops-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		882A265A1E8F41BC00D27BBB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 69A85A3TC3;
@@ -279,6 +403,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emprendesoft.Scoops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Scoops/Scoops-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -302,6 +427,7 @@
 				882A265A1E8F41BC00D27BBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
