@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		429652BFB63ACCBB5B171712 /* Pods_Scoops.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */; };
 		882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A26491E8F41BC00D27BBB /* AppDelegate.swift */; };
-		882A264C1E8F41BC00D27BBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A264B1E8F41BC00D27BBB /* ViewController.swift */; };
 		882A264F1E8F41BC00D27BBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A264D1E8F41BC00D27BBB /* Main.storyboard */; };
 		882A26511E8F41BC00D27BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 882A26501E8F41BC00D27BBB /* Assets.xcassets */; };
 		882A26541E8F41BC00D27BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */; };
 		882A26621E8F489600D27BBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 882A26611E8F489600D27BBB /* GoogleService-Info.plist */; };
+		884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FDE0F1E9487B600C89A8F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,13 +22,13 @@
 		61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.debug.xcconfig"; sourceTree = "<group>"; };
 		882A26461E8F41BC00D27BBB /* Scoops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A26491E8F41BC00D27BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		882A264B1E8F41BC00D27BBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		882A264E1E8F41BC00D27BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		882A26501E8F41BC00D27BBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		882A26531E8F41BC00D27BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		882A26551E8F41BC00D27BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		882A26601E8F479A00D27BBB /* Scoops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Scoops-Bridging-Header.h"; sourceTree = "<group>"; };
 		882A26611E8F489600D27BBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		884FDE0F1E9487B600C89A8F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 		882A265D1E8F460500D27BBB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				882A264B1E8F41BC00D27BBB /* ViewController.swift */,
+				884FDE0F1E9487B600C89A8F /* LoginViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -258,7 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				882A264C1E8F41BC00D27BBB /* ViewController.swift in Sources */,
+				884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */,
 				882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
