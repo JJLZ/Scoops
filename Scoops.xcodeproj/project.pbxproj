@@ -13,6 +13,7 @@
 		882A26511E8F41BC00D27BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 882A26501E8F41BC00D27BBB /* Assets.xcassets */; };
 		882A26541E8F41BC00D27BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */; };
 		882A26621E8F489600D27BBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 882A26611E8F489600D27BBB /* GoogleService-Info.plist */; };
+		88430F731E959DC00096C284 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88430F721E959DC00096C284 /* NewsViewController.swift */; };
 		884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FDE0F1E9487B600C89A8F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		882A26551E8F41BC00D27BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		882A26601E8F479A00D27BBB /* Scoops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Scoops-Bridging-Header.h"; sourceTree = "<group>"; };
 		882A26611E8F489600D27BBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88430F721E959DC00096C284 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		884FDE0F1E9487B600C89A8F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				884FDE0F1E9487B600C89A8F /* LoginViewController.swift */,
+				88430F721E959DC00096C284 /* NewsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88430F731E959DC00096C284 /* NewsViewController.swift in Sources */,
 				884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */,
 				882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */,
 			);

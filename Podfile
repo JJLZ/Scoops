@@ -7,6 +7,7 @@ target 'Scoops' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   
   # Pod para usar GoogleID
   pod 'GoogleSignIn'

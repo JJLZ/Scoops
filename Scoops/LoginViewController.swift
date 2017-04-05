@@ -7,28 +7,100 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
-class LoginViewController: UIViewController {
+// https://firebase.google.com/docs/auth/ios/google-signin
+
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
+    
+    // MARK: IBOutlet
+    @IBOutlet weak var btnAnonymous: UIButton!
+    @IBOutlet weak var btnGoogleSignIn: GIDSignInButton!
+    
+    // MARK: Properties
+    var handle: FIRAuthStateDidChangeListenerHandle!
     
     // MARK: ViewController Life Cycle
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+            
+            if user != nil {
+                print("El mail del usuario logado es \(String(describing: user?.email))")
+                self.performSegue(withIdentifier: "goToAuthorView", sender: nil)
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //-- Google SingIn --
+        GIDSignIn.sharedInstance().uiDelegate = self
+        makeLogout()
+        //--
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    // MARK: SignIn related methods
+    
+    fileprivate func makeLogout() {
+        
+        let firebaseAuth = FIRAuth.auth()
+        
+        do {
+            
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    // MARK: Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
     }
+}
+
+// MARK: GIDSignInDelegate
+
+extension LoginViewController {
+    
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        
+//        if let _ = error {
+//            print(error?.localizedDescription ?? "Unknown error")
+//            return
+//        }
+//        print("Google Login Successful")
+//        
+//        guard let authForFireBase = user.authentication else {
+//            return
+//        }
+//        
+//        let credentials = FIRGoogleAuthProvider.credential(withIDToken: authForFireBase.idToken, accessToken: authForFireBase.accessToken)
+//        
+//        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+//            
+//            if let _ = error {
+//                print(error?.localizedDescription ?? "Unknown error")
+//                return
+//            }
+//            
+//            print("Firebase Login Successful")
+//            print(user?.displayName ?? "")
+//        })
+//    }
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
