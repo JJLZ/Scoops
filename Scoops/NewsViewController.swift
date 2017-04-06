@@ -18,29 +18,77 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     
     // MARK: Properties
     var news: [New] = []
-
+    
+    // store a reference to the list of news in the database
+    private lazy var newsRef: FIRDatabaseReference = FIRDatabase.database().reference().child("news")
+    private var newsRefHandle: FIRDatabaseHandle?
+    
     // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        title = "News"
+        observeNews()
+    }
+    
+    deinit {
+        
+        // Stop observing database changes when the view controller dies
+        if let refHandle = newsRefHandle {
+            
+            newsRef.removeObserver(withHandle: refHandle)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // First test
-        news.append(New(title: "title1", text: "text1", author: "author1", isPublished: false))
-        news.append(New(title: "title2", text: "text1", author: "author1", isPublished: false))
-        news.append(New(title: "title3", text: "text1", author: "author1", isPublished: false))
-        
-        tableView.reloadData()
+        //--newcode test --//
+        //        // First test
+        //        news.append(New(title: "title1", text: "text1", author: "author1", isPublished: false))
+        //        news.append(New(title: "title2", text: "text1", author: "author1", isPublished: false))
+        //        news.append(New(title: "title3", text: "text1", author: "author1", isPublished: false))
+        //
+        //        tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: Firebase related methods
+    
+    private func observeNews() {
+        
+        newsRefHandle = newsRef.observe(.childAdded, with: { (snapshot) in    // this calls the completion block every time a new is added to your database
+            
+            if snapshot.childrenCount > 0 {
+                
+                self.news.append(New(snapshot: snapshot))
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
+    
+    // MARK: IBAction's
+    
+    @IBAction func addNewClicked(_ sender: Any) {
+        
+        // ...
+        //--newcode add test --
+        let testRef = newsRef.childByAutoId()
+        let newItem = ["title": "title1", "text": "text1", "author": "author1", "isPublished": false] as [String : Any]
+        
+        testRef.setValue(newItem)
+        //--
+    }
+    
     
     // MARK: UITableViewDataSource
     

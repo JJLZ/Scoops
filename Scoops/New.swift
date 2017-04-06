@@ -14,6 +14,7 @@ class New: NSObject {
     var text: String
     var author: String
     var isPublished: Bool
+    var refInCloud: FIRDatabaseReference?
     
     init(title: String, text: String, author: String, isPublished: Bool)
     {
@@ -21,6 +22,17 @@ class New: NSObject {
         self.text = text
         self.author = author
         self.isPublished = isPublished
+        
+        self.refInCloud = nil
     }
     
+    init(snapshot: FIRDataSnapshot?) {
+        
+        refInCloud = snapshot?.ref
+        
+        title = (snapshot?.value as? [String: Any])?["title"] as! String
+        text = (snapshot?.value as? [String: Any])?["text"] as! String
+        author = (snapshot?.value as? [String: Any])?["author"] as! String
+        isPublished = (snapshot?.value as? [String: Any])?["isPublished"] as! Bool
+    }
 }

@@ -192,7 +192,13 @@
                             <constraint firstItem="bvd-bm-BcM" firstAttribute="leading" secondItem="E66-9D-EbH" secondAttribute="leading" id="tn8-cd-hVq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="GzY-Rz-4Eg"/>
+                    <navigationItem key="navigationItem" id="GzY-Rz-4Eg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="HVi-hn-0XP">
+                            <connections>
+                                <action selector="addNewClicked:" destination="oXk-Xm-iFb" id="865-6u-tcB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="bvd-bm-BcM" id="HgP-Cl-lQr"/>
                     </connections>
