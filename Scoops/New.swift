@@ -8,7 +8,7 @@
 
 import UIKit
 
-class News: NSObject {
+class New: NSObject {
     
     var title: String
     var text: String
