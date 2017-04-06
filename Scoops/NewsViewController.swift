@@ -17,10 +17,20 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     let cellIdentifier = "newsCell"
     
     // MARK: Properties
+    var user: FIRUser? = nil
+    var author: String = ""
     var news: [New] = []
     
     // store a reference to the list of news in the database
-    private lazy var newsRef: FIRDatabaseReference = FIRDatabase.database().reference().child("news")
+    var newsRef: FIRDatabaseReference {
+        
+        get {
+            let userId = getUserId(fromUser: user)
+            
+            return FIRDatabase.database().reference().child(userId).child("news")
+        }
+    }
+
     private var newsRefHandle: FIRDatabaseHandle?
     
     // MARK: ViewController Life Cycle
@@ -30,7 +40,9 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        title = "News"
+        self.author = getAuthor(fromUser: self.user)
+        title = "My Reports"
+        
         observeNews()
     }
     
@@ -46,13 +58,6 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //--newcode test --//
-        //        // First test
-        //        news.append(New(title: "title1", text: "text1", author: "author1", isPublished: false))
-        //        news.append(New(title: "title2", text: "text1", author: "author1", isPublished: false))
-        //        news.append(New(title: "title3", text: "text1", author: "author1", isPublished: false))
-        //
-        //        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,16 +84,9 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     // MARK: IBAction's
     
     @IBAction func addNewClicked(_ sender: Any) {
-        
-        // ...
-        //--newcode add test --
-        let testRef = newsRef.childByAutoId()
-        let newItem = ["title": "title1", "text": "text1", "author": "author1", "isPublished": false] as [String : Any]
-        
-        testRef.setValue(newItem)
-        //--
+                
+        performSegue(withIdentifier: "showCreateNew", sender: self)
     }
-    
     
     // MARK: UITableViewDataSource
     
@@ -113,6 +111,18 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         cell.lblAuthor.text = new.author
         
         return cell
+    }
+    
+    // MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "showCreateNew" {
+            
+            let createNewVC = segue.destination as! CreateNewViewController
+            createNewVC.user = self.user
+        }
     }
 }
 

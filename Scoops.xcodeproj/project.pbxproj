@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		429652BFB63ACCBB5B171712 /* Pods_Scoops.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */; };
+		8827616E1E96F8AE00C6C5B9 /* CreateNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */; };
 		882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A26491E8F41BC00D27BBB /* AppDelegate.swift */; };
 		882A264F1E8F41BC00D27BBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882A264D1E8F41BC00D27BBB /* Main.storyboard */; };
 		882A26511E8F41BC00D27BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 882A26501E8F41BC00D27BBB /* Assets.xcassets */; };
@@ -17,12 +18,14 @@
 		88430F761E95C19A0096C284 /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88430F751E95C19A0096C284 /* New.swift */; };
 		88430F781E95CA760096C284 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88430F771E95CA760096C284 /* NewsTableViewCell.swift */; };
 		884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FDE0F1E9487B600C89A8F /* LoginViewController.swift */; };
+		886090641E9889AD00EEE807 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886090631E9889AD00EEE807 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.release.xcconfig"; sourceTree = "<group>"; };
 		512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.debug.xcconfig"; sourceTree = "<group>"; };
+		8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewViewController.swift; sourceTree = "<group>"; };
 		882A26461E8F41BC00D27BBB /* Scoops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A26491E8F41BC00D27BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		882A264E1E8F41BC00D27BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		88430F751E95C19A0096C284 /* New.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = New.swift; path = Scoops/New.swift; sourceTree = "<group>"; };
 		88430F771E95CA760096C284 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		884FDE0F1E9487B600C89A8F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		886090631E9889AD00EEE807 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			children = (
 				884FDE0F1E9487B600C89A8F /* LoginViewController.swift */,
 				88430F721E959DC00096C284 /* NewsViewController.swift */,
+				8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 		882A265F1E8F463300D27BBB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				886090631E9889AD00EEE807 /* Utilities.swift */,
 				882A26611E8F489600D27BBB /* GoogleService-Info.plist */,
 				882A26601E8F479A00D27BBB /* Scoops-Bridging-Header.h */,
 				882A26551E8F41BC00D27BBB /* Info.plist */,
@@ -278,9 +284,11 @@
 			files = (
 				88430F731E959DC00096C284 /* NewsViewController.swift in Sources */,
 				884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */,
+				886090641E9889AD00EEE807 /* Utilities.swift in Sources */,
 				88430F781E95CA760096C284 /* NewsTableViewCell.swift in Sources */,
 				88430F761E95C19A0096C284 /* New.swift in Sources */,
 				882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */,
+				8827616E1E96F8AE00C6C5B9 /* CreateNewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

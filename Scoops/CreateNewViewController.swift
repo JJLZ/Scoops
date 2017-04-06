@@ -1,114 +1,77 @@
 //
-//  LoginViewController.swift
+//  CreateNewViewController.swift
 //  Scoops
 //
-//  Created by JJLZ on 4/4/17.
+//  Created by JJLZ on 4/6/17.
 //  Copyright © 2017 ESoft. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
 
-// https://firebase.google.com/docs/auth/ios/google-signin
-
-class LoginViewController: UIViewController, GIDSignInUIDelegate {
+class CreateNewViewController: UIViewController {
     
-    // MARK: IBOutlet
-    @IBOutlet weak var btnAnonymous: UIButton!
-    @IBOutlet weak var btnGoogleSignIn: GIDSignInButton!
+    // MARK: IBOutlets
+    @IBOutlet weak var txtTitle: UITextField!
+    @IBOutlet weak var txtTexto: UITextView!
+    @IBOutlet weak var txtImageURL: UITextField!
+    @IBOutlet weak var txtLongitude: UITextField!
+    @IBOutlet weak var txtLatitude: UITextField!
+    @IBOutlet weak var swtPublish: UISwitch!
     
     // MARK: Properties
-    var handle: FIRAuthStateDidChangeListenerHandle!
-    var user: FIRUser?
+    var user: FIRUser? = nil
     
-    // MARK: ViewController Life Cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    // store a reference to the list of news in the database
+    var newsRef: FIRDatabaseReference {
         
-        handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+        get {
+            let userId = getUserId(fromUser: user)
             
-            if user != nil {
-                print("El mail del usuario logado es \(String(describing: user?.email))")
-                self.user = user
-                self.performSegue(withIdentifier: "goToAuthorView", sender: nil)
-            }
-        })
+            return FIRDatabase.database().reference().child(userId).child("news")
+        }
     }
+
+    // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //-- Google SingIn --
-        GIDSignIn.sharedInstance().uiDelegate = self
-        makeLogout()
-        //--
+
+        title = "New Report"
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     
-    // MARK: SignIn related methods
+    // MARK: IBAction's
     
-    fileprivate func makeLogout() {
+    @IBAction func saveNewClicked(_ sender: Any) {
         
-        let firebaseAuth = FIRAuth.auth()
-        
-        do {
-            
-            try firebaseAuth?.signOut()
-        } catch let signOutError as NSError {
-            
-            print ("Error signing out: %@", signOutError)
+        guard let title = txtTitle.text else {
+            return
         }
-    }
-    
-    // MARK: Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
         
-        if segue.identifier == "goToAuthorView" {
-            
-            let nav = segue.destination as! UINavigationController
-            let newsVC = nav.viewControllers.first as! NewsViewController
-            newsVC.user = self.user
+        guard let text = txtTexto.text else {
+            return
         }
+        
+        let myAuthor = getAuthor(fromUser: self.user)
+        if myAuthor.characters.count == 0 {
+            return
+        }
+                
+        let testRef = newsRef.childByAutoId()
+        let newItem = ["title": title,
+                       "text": text,
+                       "author": myAuthor,
+                       "isPublished": swtPublish.isOn,
+                       "longitude": 0.5252,
+                       "latitude": 0.5353,
+                       "imageURL": "imageURLTest"] as [String : Any]
+        
+        testRef.setValue(newItem)
     }
-}
-
-// MARK: GIDSignInDelegate
-
-extension LoginViewController {
-    
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        
-//        if let _ = error {
-//            print(error?.localizedDescription ?? "Unknown error")
-//            return
-//        }
-//        print("Google Login Successful")
-//        
-//        guard let authForFireBase = user.authentication else {
-//            return
-//        }
-//        
-//        let credentials = FIRGoogleAuthProvider.credential(withIDToken: authForFireBase.idToken, accessToken: authForFireBase.accessToken)
-//        
-//        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
-//            
-//            if let _ = error {
-//                print(error?.localizedDescription ?? "Unknown error")
-//                return
-//            }
-//            
-//            print("Firebase Login Successful")
-//            print(user?.displayName ?? "")
-//        })
-//    }
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
