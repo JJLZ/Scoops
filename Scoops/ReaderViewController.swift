@@ -1,116 +1,44 @@
 //
-//  LoginViewController.swift
+//  ReaderViewController.swift
 //  Scoops
 //
-//  Created by JJLZ on 4/4/17.
+//  Created by JJLZ on 4/8/17.
 //  Copyright © 2017 ESoft. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
 
-// https://firebase.google.com/docs/auth/ios/google-signin
+class ReaderViewController: UIViewController {
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate {
-    
-    // MARK: IBOutlet
-    @IBOutlet weak var btnGoogleSignIn: GIDSignInButton!
-    
-    // MARK: Properties
-    var handle: FIRAuthStateDidChangeListenerHandle!
-    var user: FIRUser?
-    
-    // MARK: ViewController Life Cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
-            
-            if user != nil {
-                
-                self.user = user
-                
-                if user!.isAnonymous {
-                    self.performSegue(withIdentifier: "goToReaderView", sender: nil)
-                }
-                else {
-                    self.performSegue(withIdentifier: "goToAuthorView", sender: nil)
-                }
-            }
-        })
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //-- Google SingIn --
-        GIDSignIn.sharedInstance().uiDelegate = self
-        makeLogout()
-        //--
+
+        // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+        // Dispose of any resources that can be recreated.
     }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
     
     // MARK: IBAction's
     
-    @IBAction func btnAnonymousClicked(_ sender: Any) {
+    @IBAction func btnLogoutClicked(_ sender: Any) {
         
-        FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
-            if let _ = error {
-                print(error?.localizedDescription ?? "Unknown error")
-                return
-            }
-        })
+        makeLogout()
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if segue.identifier == "goToAuthorView" {
-            
-            let nav = segue.destination as! UINavigationController
-            let newsVC = nav.viewControllers.first as! NewsViewController
-            newsVC.user = self.user
-        }
-    }
-}
-
-// MARK: GIDSignInDelegate
-
-extension LoginViewController {
-    
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        
-//        if let _ = error {
-//            print(error?.localizedDescription ?? "Unknown error")
-//            return
-//        }
-//        print("Google Login Successful")
-//        
-//        guard let authForFireBase = user.authentication else {
-//            return
-//        }
-//        
-//        let credentials = FIRGoogleAuthProvider.credential(withIDToken: authForFireBase.idToken, accessToken: authForFireBase.accessToken)
-//        
-//        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
-//            
-//            if let _ = error {
-//                print(error?.localizedDescription ?? "Unknown error")
-//                return
-//            }
-//            
-//            print("Firebase Login Successful")
-//            print(user?.displayName ?? "")
-//        })
-//    }
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

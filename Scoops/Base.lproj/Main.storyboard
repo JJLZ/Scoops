@@ -78,6 +78,9 @@
                                                     <constraint firstAttribute="height" constant="30" id="eSY-6Z-CO4"/>
                                                 </constraints>
                                                 <state key="normal" title="Anonymous"/>
+                                                <connections>
+                                                    <action selector="btnAnonymousClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y7A-Di-9Bu"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -104,9 +107,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnAnonymous" destination="THM-jz-ahl" id="8nF-s6-aT9"/>
                         <outlet property="btnGoogleSignIn" destination="gbE-IC-xpw" id="hap-be-KSq"/>
                         <segue destination="tJa-Sr-Hxo" kind="show" identifier="goToAuthorView" id="VWq-0v-P4y"/>
+                        <segue destination="Xx6-aa-wbP" kind="show" identifier="goToReaderView" id="8s0-tv-RbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -209,6 +212,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GzY-Rz-4Eg">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="EbF-Lp-pUd">
+                            <connections>
+                                <action selector="btnLogoutClicked:" destination="oXk-Xm-iFb" id="aJh-FW-DOd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="HVi-hn-0XP">
                             <connections>
                                 <action selector="addNewClicked:" destination="oXk-Xm-iFb" id="865-6u-tcB"/>
@@ -347,7 +355,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tJa-Sr-Hxo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uH6-QF-4Gp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uH6-QF-4Gp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -359,6 +367,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUv-56-HRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2783" y="35"/>
+        </scene>
+        <!--Reader View Controller-->
+        <scene sceneID="UXd-Md-wji">
+            <objects>
+                <viewController id="fgW-hn-ZDP" customClass="ReaderViewController" customModule="Scoops" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yww-xE-XqW"/>
+                        <viewControllerLayoutGuide type="bottom" id="9di-m5-euF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Og4-gE-Qw4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="N1T-pP-qc5">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="gnk-wd-TrF">
+                            <connections>
+                                <action selector="btnLogoutClicked:" destination="fgW-hn-ZDP" id="Kmv-qs-M5p"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hav-Ye-6Qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3630" y="796"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Frs-Wl-hBd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xx6-aa-wbP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6ob-eG-dem">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fgW-hn-ZDP" kind="relationship" relationship="rootViewController" id="MQl-ta-UIS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nJM-gV-NhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2782" y="796"/>
         </scene>
     </scenes>
 </document>

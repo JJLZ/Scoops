@@ -44,10 +44,11 @@ class CreateNewViewController: UIViewController {
         
     }
     
-    // MARK: IBAction's
+    // MARK: Methods
     
-    @IBAction func saveNewClicked(_ sender: Any) {
+    func saveRecord(completion: () -> ()) {
         
+        //-- TODO: Alertas para las campos requeridos --//
         guard let title = txtTitle.text else {
             return
         }
@@ -60,7 +61,7 @@ class CreateNewViewController: UIViewController {
         if myAuthor.characters.count == 0 {
             return
         }
-                
+        
         let testRef = newsRef.childByAutoId()
         let newItem = ["title": title,
                        "text": text,
@@ -71,6 +72,18 @@ class CreateNewViewController: UIViewController {
                        "imageURL": "imageURLTest"] as [String : Any]
         
         testRef.setValue(newItem)
+        
+        completion()
+    }
+    
+    // MARK: IBAction's
+    
+    @IBAction func saveNewClicked(_ sender: Any) {
+        
+        saveRecord { 
+            
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

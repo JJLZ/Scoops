@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class NewsViewController: UIViewController, UITableViewDataSource {
     
@@ -82,6 +83,12 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: IBAction's
+    
+    @IBAction func btnLogoutClicked(_ sender: Any) {
+     
+        makeLogout()
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func addNewClicked(_ sender: Any) {
                 

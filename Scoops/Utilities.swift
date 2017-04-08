@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 func getAuthor(fromUser user: FIRUser?) -> String {
     
@@ -28,3 +29,14 @@ func getUserId(fromUser user: FIRUser?) -> String {
     return ""
 }
 
+func makeLogout()
+{
+    if  let _ = FIRAuth.auth()?.currentUser {
+        do {
+            try FIRAuth.auth()?.signOut()
+            GIDSignIn.sharedInstance().signOut()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
