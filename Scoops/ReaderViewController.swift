@@ -14,7 +14,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Constants
-    let cellIdentifier = "newsCell"
+    let cellIdentifier = "readerCell"
     
     // MARK: Properties
     var news: [New] = []
@@ -77,7 +77,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ReaderTableViewCell
         
         let new: New = news[indexPath.row]
         

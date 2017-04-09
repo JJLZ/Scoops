@@ -38,6 +38,10 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
+        //--now Custom Cell --
+        tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        //--
+        
         self.author = getAuthor(fromUser: self.user)
         title = "My Reports"
         
@@ -105,9 +109,10 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         
         let new: New = news[indexPath.row]
         
-        cell.lblTitle.text = new.title
-        cell.lblText.text = new.text
-        cell.lblAuthor.text = new.author
+        cell.lblTitle?.text = new.title
+        cell.lblText?.text = new.text
+        cell.lblPublished?.text = (new.isPublished == true) ? "Published" : "Unpublished: tap to publish"
+        cell.lblPublished?.textColor = (new.isPublished == true) ? UIColor.black : UIColor.red
         
         return cell
     }
