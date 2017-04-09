@@ -19,16 +19,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
     // MARK: Properties
     var news: [New] = []
     
-    // store a reference to the list of news in the database
-    var newsRef: FIRDatabaseReference {
-        
-        get {
-//            let userId = getUserId(fromUser: user)
-            
-            return FIRDatabase.database().reference().child("??").child("news")
-        }
-    }
-    
+    let newsRef = FIRDatabase.database().reference(withPath: "news")
     private var newsRefHandle: FIRDatabaseHandle?
     
     // MARK: ViewController Life Cycle
@@ -36,6 +27,9 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        observeNews()
     }
 
     override func didReceiveMemoryWarning() {

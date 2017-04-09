@@ -22,16 +22,13 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     var author: String = ""
     var news: [New] = []
     
-    // store a reference to the list of news in the database
-    var newsRef: FIRDatabaseReference {
-        
-        get {
-            let userId = getUserId(fromUser: user)
-            
-            return FIRDatabase.database().reference().child(userId).child("news")
-        }
+    var userId: String {
+        return  getUserId(fromUser: user)
     }
-
+    
+    // store a reference to the list of news in the database
+    var newsRef = FIRDatabase.database().reference().child("news")
+    
     private var newsRefHandle: FIRDatabaseHandle?
     
     // MARK: ViewController Life Cycle
@@ -44,7 +41,7 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         self.author = getAuthor(fromUser: self.user)
         title = "My Reports"
         
-        observeNews()
+        observeNews()        
     }
     
     deinit {
@@ -64,7 +61,7 @@ class NewsViewController: UIViewController, UITableViewDataSource {
     
     private func observeNews() {
         
-        newsRefHandle = newsRef.observe(.childAdded, with: { (snapshot) in    // this calls the completion block every time a new is added to your database
+        newsRef.queryOrdered(byChild: "authorID").queryEqual(toValue: self.userId).observe(.childAdded, with: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 

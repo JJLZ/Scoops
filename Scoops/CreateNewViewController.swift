@@ -22,13 +22,10 @@ class CreateNewViewController: UIViewController {
     var user: FIRUser? = nil
     
     // store a reference to the list of news in the database
-    var newsRef: FIRDatabaseReference {
-        
-        get {
-            let userId = getUserId(fromUser: user)
-            
-            return FIRDatabase.database().reference().child(userId).child("news")
-        }
+    var newsRef = FIRDatabase.database().reference().child("news")
+    
+    var userId: String {
+        return  getUserId(fromUser: user)
     }
 
     // MARK: ViewController Life Cycle
@@ -48,7 +45,7 @@ class CreateNewViewController: UIViewController {
     
     func saveRecord(completion: () -> ()) {
         
-        //-- TODO: Alertas para las campos requeridos --//
+        //-- jTODO: Alertas para las campos requeridos --//
         guard let title = txtTitle.text else {
             return
         }
@@ -66,6 +63,7 @@ class CreateNewViewController: UIViewController {
         let newItem = ["title": title,
                        "text": text,
                        "author": myAuthor,
+                        "authorID": self.userId,
                        "isPublished": swtPublish.isOn,
                        "longitude": 0.5252,
                        "latitude": 0.5353,

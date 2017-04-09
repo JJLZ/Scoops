@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				882A264D1E8F41BC00D27BBB /* Main.storyboard */,
-				88430F771E95CA760096C284 /* NewsTableViewCell.swift */,
 				882A26521E8F41BC00D27BBB /* LaunchScreen.storyboard */,
+				88430F771E95CA760096C284 /* NewsTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
