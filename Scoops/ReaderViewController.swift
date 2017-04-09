@@ -8,29 +8,91 @@
 
 import UIKit
 
-class ReaderViewController: UIViewController {
+class ReaderViewController: UIViewController, UITableViewDataSource {
+    
+    // MARK: IBOutlet's
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Constants
+    let cellIdentifier = "newsCell"
+    
+    // MARK: Properties
+    var news: [New] = []
+    
+    // store a reference to the list of news in the database
+    var newsRef: FIRDatabaseReference {
+        
+        get {
+//            let userId = getUserId(fromUser: user)
+            
+            return FIRDatabase.database().reference().child("??").child("news")
+        }
+    }
+    
+    private var newsRefHandle: FIRDatabaseHandle?
+    
+    // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    deinit {
+        
+        // Stop observing database changes when the view controller dies
+        if let refHandle = newsRefHandle {
+            
+            newsRef.removeObserver(withHandle: refHandle)
+        }
     }
-    */
+    
+    // MARK: Firebase related methods
+    
+    private func observeNews() {
+        
+        newsRefHandle = newsRef.observe(.childAdded, with: { (snapshot) in    // this calls the completion block every time a new is added to your database
+            
+            if snapshot.childrenCount > 0 {
+                
+                self.news.append(New(snapshot: snapshot))
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
+    
+    // MARK: UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return news.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NewsTableViewCell
+        
+        let new: New = news[indexPath.row]
+        
+        cell.lblTitle.text = new.title
+        cell.lblText.text = new.text
+        cell.lblAuthor.text = new.author
+        
+        return cell
+    }
     
     // MARK: IBAction's
     

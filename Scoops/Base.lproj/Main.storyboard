@@ -379,7 +379,32 @@
                     <view key="view" contentMode="scaleToFill" id="Og4-gE-Qw4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zu7-3V-Eqi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" id="Sqd-sY-Pp8" customClass="NewsTableViewCell" customModule="Scoops" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sqd-sY-Pp8" id="ekV-N4-IEy">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="fgW-hn-ZDP" id="9Lf-ac-anh"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zu7-3V-Eqi" secondAttribute="trailing" id="Iqc-6K-sE5"/>
+                            <constraint firstItem="zu7-3V-Eqi" firstAttribute="leading" secondItem="Og4-gE-Qw4" secondAttribute="leading" id="acj-H8-H0N"/>
+                            <constraint firstItem="zu7-3V-Eqi" firstAttribute="top" secondItem="yww-xE-XqW" secondAttribute="bottom" id="dXf-wy-3Pg"/>
+                            <constraint firstItem="9di-m5-euF" firstAttribute="top" secondItem="zu7-3V-Eqi" secondAttribute="bottom" id="lja-my-7Vc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N1T-pP-qc5">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="gnk-wd-TrF">
@@ -388,6 +413,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zu7-3V-Eqi" id="A6d-Fz-KKQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hav-Ye-6Qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
