@@ -38,7 +38,7 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        //--now Custom Cell --
+        //-- Custom Cell --
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         //--
         

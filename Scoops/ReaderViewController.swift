@@ -50,7 +50,19 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
     
     private func observeNews() {
         
-        newsRefHandle = newsRef.observe(.childAdded, with: { (snapshot) in    // this calls the completion block every time a new is added to your database
+        newsRefHandle = newsRef.queryOrdered(byChild: "isPublished").queryEqual(toValue: true).observe(.childAdded, with: { (snapshot) in
+            
+            if snapshot.childrenCount > 0 {
+                
+                self.news.append(New(snapshot: snapshot))
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        
+        newsRefHandle = newsRef.queryOrdered(byChild: "isPublished").queryEqual(toValue: true).observe(.childChanged, with: { (snapshot) in
             
             if snapshot.childrenCount > 0 {
                 
