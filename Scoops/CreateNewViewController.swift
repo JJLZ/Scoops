@@ -7,22 +7,26 @@
 //
 
 import UIKit
+import Photos
+import MobileCoreServices
 
 class CreateNewViewController: UIViewController {
     
     // MARK: IBOutlets
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtTexto: UITextView!
-    @IBOutlet weak var txtImageURL: UITextField!
+    @IBOutlet weak var ivPhoto: UIImageView!
     @IBOutlet weak var txtLongitude: UITextField!
     @IBOutlet weak var txtLatitude: UITextField!
-    @IBOutlet weak var swtPublish: UISwitch!
     
     // MARK: Properties
     var user: FIRUser? = nil
     
     // store a reference to the list of news in the database
     var newsRef = FIRDatabase.database().reference().child("news")
+    
+    // Firebase storage reference and is conceptually similar to the Firebase database references you’ve seen already, but for a storage object
+    lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://scoops-4fda2.appspot.com")
     
     var userId: String {
         return  getUserId(fromUser: user)
@@ -32,7 +36,7 @@ class CreateNewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = "New Report"
     }
 
@@ -64,7 +68,7 @@ class CreateNewViewController: UIViewController {
                        "text": text,
                        "author": myAuthor,
                         "authorID": self.userId,
-                       "isPublished": swtPublish.isOn,
+                       "isPublished": false,
                        "longitude": 0.5252,
                        "latitude": 0.5353,
                        "imageURL": "imageURLTest"] as [String : Any]
@@ -72,6 +76,39 @@ class CreateNewViewController: UIViewController {
         testRef.setValue(newItem)
         
         completion()
+    }
+    
+    // MARK: Firebase storage
+    
+    func uploadImageToFirebaseStorage(data: Data)
+    {
+        let localStorageRef = FIRStorage.storage().reference(withPath: "images/demo.jpg")
+        let uploadMetadata = FIRStorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        
+        let uploadTask = localStorageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
+            
+            if (error != nil)
+            {
+                print(error?.localizedDescription ?? "Unknown error")
+            }
+            else
+            {
+                print("Upload complete! Here's some metadata! \(String(describing: metadata))")
+            }
+        }
+        
+        // Update the progress bar
+        uploadTask.observe(.progress) { (taskSnapshot) in
+            
+            guard let progress = taskSnapshot.progress else { return }
+            
+        }
+    }
+    
+    func uploadMovieToFirebaseStorage(url: NSURL)
+    {
+        
     }
     
     // MARK: IBAction's
@@ -82,6 +119,51 @@ class CreateNewViewController: UIViewController {
             
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @IBAction func bntTakePhotoClicked(_ sender: Any) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+// MARK: Image Picker Delegate
+
+extension CreateNewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        guard let mediaType: String = info[UIImagePickerControllerMediaType] as? String else {
+            
+            picker.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        if mediaType == (kUTTypeImage as String)    // The user has selected an image
+        {
+            if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage, let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
+            {
+                uploadImageToFirebaseStorage(data: imageData)
+            }
+        }
+        else if mediaType == (kUTTypeMovie as String)   // the user has selected a movie
+        {
+            if let movieURL = info[UIImagePickerControllerMediaURL] as? NSURL
+            {
+                uploadMovieToFirebaseStorage(url: movieURL)
+            }
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+        
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
