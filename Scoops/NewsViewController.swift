@@ -16,6 +16,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: Constants
     let cellIdentifier = "newsCell"
+    let cellHeight: CGFloat = 129.0
     
     // MARK: Properties
     var user: FIRUser? = nil
@@ -119,6 +120,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: UITableViewDelegate
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return cellHeight
+    }
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)

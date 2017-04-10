@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ReaderViewController: UIViewController, UITableViewDataSource {
+class ReaderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: IBOutlet's
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Constants
     let cellIdentifier = "readerCell"
+    let cellHeight: CGFloat = 122.0
     
     // MARK: Properties
     var news: [New] = []
@@ -28,6 +29,10 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        //-- Custom Cell --
+        tableView.register(UINib(nibName: "ReaderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        //--
         
         observeNews()
     }
@@ -87,6 +92,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
         return news.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ReaderTableViewCell
@@ -95,9 +101,16 @@ class ReaderViewController: UIViewController, UITableViewDataSource {
         
         cell.lblTitle.text = new.title
         cell.lblText.text = new.text
-        cell.lblAuthor.text = new.author
+        cell.lblAuthor.text = "by " + new.author
         
         return cell
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return cellHeight
     }
     
     // MARK: IBAction's
