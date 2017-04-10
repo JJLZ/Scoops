@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class NewsViewController: UIViewController, UITableViewDataSource {
+class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: IBOutlet's
     @IBOutlet weak var tableView: UITableView!
@@ -115,6 +115,38 @@ class NewsViewController: UIViewController, UITableViewDataSource {
         cell.lblPublished?.textColor = (new.isPublished == true) ? UIColor.black : UIColor.red
         
         return cell
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedItem = news[indexPath.row]
+        
+        if selectedItem.isPublished == false {
+            
+            let alertController = UIAlertController(title          : "Publish Now!",
+                                                    message        : "Do you want publish this new?",
+                                                    preferredStyle : .alert)
+            
+            let saveAction = UIAlertAction(title: "Publish", style: .default, handler: { (alertAction) in
+                
+                selectedItem.refInCloud?.updateChildValues(["isPublished": true])
+        
+                let cell = tableView.cellForRow(at: indexPath) as! NewsTableViewCell
+                cell.lblPublished?.text = "Published"
+                cell.lblPublished?.textColor = UIColor.black
+            })
+            
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(actionCancel)
+            
+            self.present(alertController, animated: true, completion: {})
+        }
     }
     
     // MARK: Navigation

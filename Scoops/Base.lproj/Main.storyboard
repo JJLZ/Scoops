@@ -133,6 +133,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oXk-Xm-iFb" id="a9d-dx-xGc"/>
+                                    <outlet property="delegate" destination="oXk-Xm-iFb" id="N3n-5R-PdO"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -195,7 +196,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyh-ab-TKs">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xyh-ab-TKs">
                                 <rect key="frame" x="163" y="318" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="qZn-hd-BXO"/>
