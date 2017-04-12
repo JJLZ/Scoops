@@ -15,7 +15,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: Constants
     let cellIdentifier = "readerCell"
-    let cellHeight: CGFloat = 122.0
+    let cellHeight: CGFloat = 96.0
     
     // MARK: Properties
     var news: [New] = []
@@ -100,7 +100,6 @@ class ReaderViewController: UIViewController, UITableViewDataSource, UITableView
         let new: New = news[indexPath.row]
         
         cell.lblTitle.text = new.title
-        cell.lblText.text = new.text
         cell.lblAuthor.text = "by " + new.author
         
         // Image for the new

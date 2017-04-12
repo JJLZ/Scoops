@@ -13,7 +13,6 @@ class ReaderTableViewCell: UITableViewCell {
     // MARK: IBOutlet's
     @IBOutlet weak var ivPhoto: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var lblAuthor: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
