@@ -19,13 +19,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="128.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="8mM-mK-9j6" userLabel="ivPhoto">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="8mM-mK-9j6" userLabel="ivPhoto">
                         <rect key="frame" x="8" y="8" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="12Q-86-wSX"/>
                             <constraint firstAttribute="height" constant="80" id="yjc-QH-6Q6"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pqB-jE-WVN" userLabel="spinner">
+                        <rect key="frame" x="30" y="30" width="37" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="8T9-NO-fCv"/>
+                            <constraint firstAttribute="width" constant="37" id="RlI-eL-01X"/>
+                        </constraints>
+                        <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7U-Gq-w3H" userLabel="lblTitle">
                         <rect key="frame" x="96" y="8" width="216" height="21"/>
                         <constraints>
@@ -61,7 +69,9 @@
                     <constraint firstItem="8mM-mK-9j6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Pv5-tG-4LL"/>
                     <constraint firstItem="Kda-qc-QOk" firstAttribute="top" secondItem="W7U-Gq-w3H" secondAttribute="bottom" constant="8" id="QcO-dy-JdH"/>
                     <constraint firstItem="W7U-Gq-w3H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="SXx-Af-udG"/>
+                    <constraint firstItem="pqB-jE-WVN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="agA-7a-cHd"/>
                     <constraint firstItem="W7U-Gq-w3H" firstAttribute="leading" secondItem="8mM-mK-9j6" secondAttribute="trailing" constant="8" id="cBh-w9-sHS"/>
+                    <constraint firstItem="pqB-jE-WVN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="22" id="gEV-lK-NIK"/>
                     <constraint firstItem="0cQ-wK-N8r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="jC6-Jm-mOT"/>
                     <constraint firstItem="8mM-mK-9j6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="khU-GR-Tbn"/>
                     <constraint firstItem="Kda-qc-QOk" firstAttribute="leading" secondItem="8mM-mK-9j6" secondAttribute="trailing" constant="8" id="mO1-42-Us5"/>
@@ -73,8 +83,9 @@
                 <outlet property="lblPublished" destination="0cQ-wK-N8r" id="3pK-mq-Uf3"/>
                 <outlet property="lblText" destination="Kda-qc-QOk" id="eEw-yA-oTY"/>
                 <outlet property="lblTitle" destination="W7U-Gq-w3H" id="iUP-0r-PJb"/>
+                <outlet property="spinner" destination="pqB-jE-WVN" id="QmP-NO-QcS"/>
             </connections>
-            <point key="canvasLocation" x="-860" y="-1284.5"/>
+            <point key="canvasLocation" x="-949" y="-1356"/>
         </tableViewCell>
     </objects>
     <resources>

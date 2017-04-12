@@ -15,18 +15,64 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var lblPublished: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    func downloadImage(imageURL: URL)
+    {
+        //-- Default image --
+        var defaultImageAsData: Data? = nil
+        
+        if let img = UIImage(named: "news.png") {
+            if let data:Data = UIImagePNGRepresentation(img) {
+                defaultImageAsData = data
+            }
+        }
+        //--
+        
+        let asyncData = AsyncData(url: imageURL, defaultData: defaultImageAsData!)
+        
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
+        asyncData.delegate = self
+        ivPhoto.image = UIImage(data: asyncData.data)
+    }
+}
+
+extension NewsTableViewCell: AsyncDataDelegate {
+    
+    func asyncData(_ sender: AsyncData, shouldStartLoadingFrom url: URL) -> Bool {
+        // nos pregunta si puede hacer la descarga.
+        // por supuesto!
+        return true
+    }
+    
+    func asyncData(_ sender: AsyncData, willStartLoadingFrom url: URL) {
+        // Nos avisa que va a empezar
+        
+    }
+    
+    func asyncData(_ sender: AsyncData, didEndLoadingFrom url: URL) {
+        
+        // la actualizo, y encima con una animación (más en el avanzado)
+        UIView.transition(with: ivPhoto,
+                          duration: 0.7,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.ivPhoto.image = UIImage(data: sender.data)
+        }, completion: nil)
+        
+        spinner.stopAnimating()
+        spinner.isHidden = true
+    }
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

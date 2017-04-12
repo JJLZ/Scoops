@@ -115,6 +115,13 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.lblPublished?.text = (new.isPublished == true) ? "Published" : "Unpublished: tap to publish"
         cell.lblPublished?.textColor = (new.isPublished == true) ? UIColor.black : UIColor.red
         
+        // Image for the new
+        if new.imageURL != "" {
+            cell.downloadImage(imageURL: URL(string: new.imageURL)!)
+        } else {
+            cell.ivPhoto.image = UIImage(named: "news.png")
+        }
+        
         return cell
     }
     
