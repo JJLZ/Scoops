@@ -1,150 +1,108 @@
 //
-//  ReaderViewController.swift
+//  DetailViewController.swift
 //  Scoops
 //
-//  Created by JJLZ on 4/8/17.
+//  Created by JJLZ on 4/12/17.
 //  Copyright © 2017 ESoft. All rights reserved.
 //
 
 import UIKit
 
-class ReaderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController {
     
     // MARK: IBOutlet's
-    @IBOutlet weak var tableView: UITableView!
-    
-    // MARK: Constants
-    let cellIdentifier = "readerCell"
-    let cellHeight: CGFloat = 96.0
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var ivPhoto: UIImageView!
+    @IBOutlet weak var txtReport: UITextView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var vImage: UIView!
     
     // MARK: Properties
-    var news: [New] = []
-    
-    let newsRef = FIRDatabase.database().reference(withPath: "news")
-    private var newsRefHandle: FIRDatabaseHandle?
-    
-    // MARK: ViewController Life Cycle
+    var new: New? = nil
 
+    // MARK: ViewController Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.automaticallyAdjustsScrollViewInsets = false
         
-        //-- Custom Cell --
-        tableView.register(UINib(nibName: "ReaderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        //--
-        
-        observeNews()
+        if let currentReport = self.new {
+            
+            showReport(new: currentReport)
+            
+            if currentReport.imageURL != "" {
+                downloadImage(imageURL: URL(string: currentReport.imageURL)!)
+            }
+            else {
+                spinner.isHidden = true
+//                vImage.frame.size.height = 0
+//                ivPhoto.frame.size.height = 0
+//                spinner.frame.size.height = 0
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        
-        // Stop observing database changes when the view controller dies
-        if let refHandle = newsRefHandle {
-            
-            newsRef.removeObserver(withHandle: refHandle)
-        }
-    }
+    // MARK: Methods
     
-    // MARK: Firebase related methods
-    
-    private func observeNews() {
+    func downloadImage(imageURL: URL)
+    {
+        //-- Default image --
+        var defaultImageAsData: Data? = nil
         
-        newsRefHandle = newsRef.queryOrdered(byChild: "isPublished").queryEqual(toValue: true).observe(.childAdded, with: { (snapshot) in
-            
-            if snapshot.childrenCount > 0 {
-                
-                self.news.append(New(snapshot: snapshot))
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+        if let img = UIImage(named: "news.png") {
+            if let data:Data = UIImagePNGRepresentation(img) {
+                defaultImageAsData = data
             }
-        })
-        
-        newsRefHandle = newsRef.queryOrdered(byChild: "isPublished").queryEqual(toValue: true).observe(.childChanged, with: { (snapshot) in
-            
-            if snapshot.childrenCount > 0 {
-                
-                self.news.append(New(snapshot: snapshot))
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        })
-    }
-    
-    // MARK: UITableViewDataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return news.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ReaderTableViewCell
-        
-        let new: New = news[indexPath.row]
-        
-        cell.lblTitle.text = new.title
-        cell.lblAuthor.text = "by " + new.author
-        
-        // Image for the new
-        if new.imageURL != "" {
-            cell.downloadImage(imageURL: URL(string: new.imageURL)!)
-        } else {
-            cell.ivPhoto.image = UIImage(named: "news.png")
         }
+        //--
         
-        return cell
+        let asyncData = AsyncData(url: imageURL, defaultData: defaultImageAsData!)
+        
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
+        asyncData.delegate = self
+        ivPhoto.image = UIImage(data: asyncData.data)
     }
     
-    // MARK: UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return cellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        performSegue(withIdentifier: "showDetail", sender: self)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    // MARK: IBAction's
-    
-    @IBAction func btnLogoutClicked(_ sender: Any) {
-        
-        makeLogout()
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if segue.identifier == "showDetail" {
-            
-            let detailVC = segue.destination as! DetailViewController
-            let selectedRow = tableView.indexPathForSelectedRow!.row
-            detailVC.new = news[selectedRow]
-        }
+    func showReport(new: New)
+    {
+        lblTitle.text? = new.title
+        txtReport.text = new.text
     }
 }
+
+extension DetailViewController: AsyncDataDelegate {
+    
+    func asyncData(_ sender: AsyncData, shouldStartLoadingFrom url: URL) -> Bool {
+        // nos pregunta si puede hacer la descarga.
+        // por supuesto!
+        return true
+    }
+    
+    func asyncData(_ sender: AsyncData, willStartLoadingFrom url: URL) {
+        // Nos avisa que va a empezar
+        
+    }
+    
+    func asyncData(_ sender: AsyncData, didEndLoadingFrom url: URL) {
+        
+        // la actualizo, y encima con una animación (más en el avanzado)
+        UIView.transition(with: ivPhoto,
+                          duration: 0.7,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.ivPhoto.image = UIImage(data: sender.data)
+        }, completion: nil)
+        
+        spinner.stopAnimating()
+        spinner.isHidden = true
+    }
+}
+
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 

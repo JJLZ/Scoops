@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -332,7 +333,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uH6-QF-4Gp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uH6-QF-4Gp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -383,11 +384,92 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="zu7-3V-Eqi" id="Zv2-rD-9uH"/>
+                        <segue destination="jKa-Sv-llq" kind="show" identifier="showDetail" id="ieO-eW-OAm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hav-Ye-6Qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3630" y="796"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="WLD-DP-epT">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="jKa-Sv-llq" customClass="DetailViewController" customModule="Scoops" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r9o-2S-t67"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfb-gx-FK4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jJx-BZ-Tj1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fJs-EV-1UE">
+                                <rect key="frame" x="16" y="80" width="343" height="587"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhu-NX-w1r" userLabel="lblTitle">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="OYp-QA-Jve"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWy-8D-05G" userLabel="vImage">
+                                        <rect key="frame" x="0.0" y="33" width="343" height="166"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="Grq-gJ-zaj" userLabel="ivPhoto">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="166"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </imageView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="KkN-4f-i1g" userLabel="spinner">
+                                                <rect key="frame" x="153" y="65" width="37" height="37"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="37" id="76N-SY-AiA"/>
+                                                    <constraint firstAttribute="height" constant="37" id="H9Z-qB-ZWw"/>
+                                                </constraints>
+                                                <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="KkN-4f-i1g" firstAttribute="centerY" secondItem="gWy-8D-05G" secondAttribute="centerY" id="1We-oN-LXy"/>
+                                            <constraint firstAttribute="height" constant="166" id="Gw1-BV-h0G"/>
+                                            <constraint firstItem="Grq-gJ-zaj" firstAttribute="leading" secondItem="gWy-8D-05G" secondAttribute="leading" id="LLc-68-4Rl"/>
+                                            <constraint firstAttribute="bottom" secondItem="Grq-gJ-zaj" secondAttribute="bottom" id="O1M-h4-Ftd"/>
+                                            <constraint firstItem="Grq-gJ-zaj" firstAttribute="top" secondItem="gWy-8D-05G" secondAttribute="top" id="WE2-fD-2fm"/>
+                                            <constraint firstAttribute="trailing" secondItem="Grq-gJ-zaj" secondAttribute="trailing" id="vDi-ho-gqg"/>
+                                            <constraint firstItem="KkN-4f-i1g" firstAttribute="centerX" secondItem="gWy-8D-05G" secondAttribute="centerX" id="w2J-sa-TEJ"/>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="de donde sacan ustedes esta informacion, y lo que me revela este" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lP5-MU-Ixk" userLabel="txtReport">
+                                        <rect key="frame" x="0.0" y="207" width="343" height="380"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fJs-EV-1UE" firstAttribute="bottom" secondItem="wfb-gx-FK4" secondAttribute="top" id="4UR-Um-XJx"/>
+                            <constraint firstItem="fJs-EV-1UE" firstAttribute="leading" secondItem="jJx-BZ-Tj1" secondAttribute="leadingMargin" id="Ij4-3T-3Jx"/>
+                            <constraint firstItem="fJs-EV-1UE" firstAttribute="trailing" secondItem="jJx-BZ-Tj1" secondAttribute="trailingMargin" id="Rr7-oc-Ga7"/>
+                            <constraint firstItem="fJs-EV-1UE" firstAttribute="top" secondItem="r9o-2S-t67" secondAttribute="bottom" constant="16" id="sB8-uc-XSA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ivPhoto" destination="Grq-gJ-zaj" id="sGm-ui-P1J"/>
+                        <outlet property="lblTitle" destination="rhu-NX-w1r" id="8rz-0U-8Te"/>
+                        <outlet property="spinner" destination="KkN-4f-i1g" id="Fzn-J6-dG5"/>
+                        <outlet property="txtReport" destination="lP5-MU-Ixk" id="NIe-KC-UwD"/>
+                        <outlet property="vImage" destination="gWy-8D-05G" id="2kM-Dt-b3Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1CP-lo-AaE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4464.8000000000002" y="795.6521739130435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Frs-Wl-hBd">
@@ -396,7 +478,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6ob-eG-dem">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6ob-eG-dem">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -410,4 +492,7 @@
             <point key="canvasLocation" x="2782" y="796"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="news" width="256" height="256"/>
+    </resources>
 </document>

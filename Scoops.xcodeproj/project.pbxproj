@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		429652BFB63ACCBB5B171712 /* Pods_Scoops.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */; };
+		8814712D1E9EC9FF00DA67A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8814712C1E9EC9FF00DA67A2 /* DetailViewController.swift */; };
 		882198E91E999572006289E0 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882198E81E999572006289E0 /* ReaderViewController.swift */; };
 		8827616E1E96F8AE00C6C5B9 /* CreateNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */; };
 		882A264A1E8F41BC00D27BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A26491E8F41BC00D27BBB /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 		0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.release.xcconfig"; sourceTree = "<group>"; };
 		512B53E50141A6A83D1CA5F0 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.debug.xcconfig"; sourceTree = "<group>"; };
+		8814712C1E9EC9FF00DA67A2 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		882198E81E999572006289E0 /* ReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
 		8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewViewController.swift; sourceTree = "<group>"; };
 		882A26461E8F41BC00D27BBB /* Scoops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoops.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				88430F721E959DC00096C284 /* NewsViewController.swift */,
 				8827616D1E96F8AE00C6C5B9 /* CreateNewViewController.swift */,
 				882198E81E999572006289E0 /* ReaderViewController.swift */,
+				8814712C1E9EC9FF00DA67A2 /* DetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8814712D1E9EC9FF00DA67A2 /* DetailViewController.swift in Sources */,
 				88430F731E959DC00096C284 /* NewsViewController.swift in Sources */,
 				884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */,
 				88B579F61E9E9556009FC2A6 /* AsyncData.swift in Sources */,
