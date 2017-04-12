@@ -103,6 +103,13 @@ class ReaderViewController: UIViewController, UITableViewDataSource, UITableView
         cell.lblText.text = new.text
         cell.lblAuthor.text = "by " + new.author
         
+        // Image for the new
+        if new.imageURL != "" {
+            cell.downloadImage(imageURL: URL(string: new.imageURL)!)
+        } else {
+            cell.ivPhoto.image = UIImage(named: "news.png")
+        }
+        
         return cell
     }
     

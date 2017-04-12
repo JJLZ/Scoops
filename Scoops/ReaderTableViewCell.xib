@@ -19,13 +19,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="121.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="Gab-iB-aGl" userLabel="ivPhoto">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="Gab-iB-aGl" userLabel="ivPhoto">
                         <rect key="frame" x="8" y="8" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="8eC-B6-6iq"/>
                             <constraint firstAttribute="height" constant="80" id="NmU-gr-kq6"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kT1-6V-na7">
+                        <rect key="frame" x="30" y="30" width="37" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="37" id="H5s-1S-ho1"/>
+                            <constraint firstAttribute="height" constant="37" id="htN-tC-far"/>
+                        </constraints>
+                        <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-6M-WD9" userLabel="lblTitle">
                         <rect key="frame" x="96" y="8" width="216" height="21"/>
                         <constraints>
@@ -60,8 +68,10 @@
                     <constraint firstItem="Gab-iB-aGl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="9IL-0o-EnD"/>
                     <constraint firstItem="kcX-6M-WD9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="EyO-g7-dTW"/>
                     <constraint firstItem="P4e-J8-s7r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ZkL-gP-BNx"/>
+                    <constraint firstItem="kT1-6V-na7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="22" id="aSm-sn-BZd"/>
                     <constraint firstItem="kcX-6M-WD9" firstAttribute="leading" secondItem="Gab-iB-aGl" secondAttribute="trailing" constant="8" id="b4m-RU-o82"/>
                     <constraint firstItem="cez-85-CLP" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="eyv-e2-M4p"/>
+                    <constraint firstItem="kT1-6V-na7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="gMf-8n-t32"/>
                     <constraint firstItem="cez-85-CLP" firstAttribute="top" secondItem="kcX-6M-WD9" secondAttribute="bottom" constant="8" id="gPB-ml-qm8"/>
                     <constraint firstItem="P4e-J8-s7r" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kO0-sy-jNq"/>
                     <constraint firstItem="P4e-J8-s7r" firstAttribute="top" secondItem="cez-85-CLP" secondAttribute="bottom" constant="8" id="vXf-k8-LUF"/>
@@ -73,8 +83,9 @@
                 <outlet property="lblAuthor" destination="P4e-J8-s7r" id="tQG-Jh-X7q"/>
                 <outlet property="lblText" destination="cez-85-CLP" id="jMO-2G-t3q"/>
                 <outlet property="lblTitle" destination="kcX-6M-WD9" id="3fL-ko-LP6"/>
+                <outlet property="spinner" destination="kT1-6V-na7" id="6Wp-1o-XLk"/>
             </connections>
-            <point key="canvasLocation" x="-667" y="-416"/>
+            <point key="canvasLocation" x="-989" y="-407"/>
         </tableViewCell>
     </objects>
     <resources>

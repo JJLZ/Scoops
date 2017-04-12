@@ -18,6 +18,7 @@ class CreateNewViewController: UIViewController {
     @IBOutlet weak var ivPhoto: UIImageView!
     @IBOutlet weak var txtLongitude: UITextField!
     @IBOutlet weak var txtLatitude: UITextField!
+    @IBOutlet weak var pvUpload: UIProgressView!
     
     // MARK: Properties
     var user: FIRUser? = nil
@@ -27,6 +28,8 @@ class CreateNewViewController: UIViewController {
     
     // Firebase storage reference and is conceptually similar to the Firebase database references you’ve seen already, but for a storage object
     lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://scoops-4fda2.appspot.com")
+    
+    var imageURL: URL? = nil
     
     var userId: String {
         return  getUserId(fromUser: user)
@@ -49,63 +52,106 @@ class CreateNewViewController: UIViewController {
     
     func saveRecord(completion: () -> ()) {
         
-        //-- jTODO: Alertas para las campos requeridos --//
-        guard let title = txtTitle.text else {
+        guard let title = txtTitle.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), title != "" else {
+            
+            self.showAlertFieldRequired(requiredField: "title for the report")
             return
         }
         
-        guard let text = txtTexto.text else {
+        guard let text = txtTexto.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), text != "" else {
+            
+            self.showAlertFieldRequired(requiredField: "the text for the report")
             return
         }
         
+        //-- jTODO: ?? --//
         let myAuthor = getAuthor(fromUser: self.user)
         if myAuthor.characters.count == 0 {
             return
         }
         
         let testRef = newsRef.childByAutoId()
-        let newItem = ["title": title,
-                       "text": text,
-                       "author": myAuthor,
-                        "authorID": self.userId,
-                       "isPublished": false,
-                       "longitude": 0.5252,
-                       "latitude": 0.5353,
-                       "imageURL": "imageURLTest"] as [String : Any]
+        let newItem = ["title"       : title,
+                       "text"        : text,
+                       "author"      : myAuthor,
+                        "authorID"   : self.userId,
+                       "isPublished" : false,
+                       "longitude"   : 0.5252,
+                       "latitude"    : 0.5353,
+                       "imageURL"    : self.urlToString(url: self.imageURL)
+            ] as [String: Any]
         
         testRef.setValue(newItem)
         
         completion()
     }
     
+    func urlToString(url: URL?) -> String
+    {
+        if let imageURL = url
+        {
+            return (imageURL.absoluteString)
+        }
+        else
+        {
+            return ""
+        }
+    }
+    
+    func showAlertFieldRequired(requiredField text: String)
+    {
+        let alertController = UIAlertController(title          : "Saving record...",
+                                                message        : "The is \(text) is required.",
+                                                preferredStyle : .alert)
+        
+        let actionCancel = UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
+            
+        })
+        
+        alertController.addAction(actionCancel)
+        
+        self.present(alertController, animated: true, completion: { })
+    }
+    
     // MARK: Firebase storage
     
     func uploadImageToFirebaseStorage(data: Data)
     {
-        let localStorageRef = FIRStorage.storage().reference(withPath: "images/demo.jpg")
+        self.pvUpload.progress = 0.0
+        //-- jTODO: Disable buttons "save" and "back" until upload have finished --//
+        
+        let imagePath = "/images/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        let fullStorageRef = self.storageRef.child(imagePath)
+        
         let uploadMetadata = FIRStorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
         
-        let uploadTask = localStorageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
+        let uploadTask = fullStorageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
             
             if (error != nil)
             {
                 print(error?.localizedDescription ?? "Unknown error")
+                self.imageURL = nil
+                
+                return
             }
             else
             {
-                print("Upload complete! Here's some metadata! \(String(describing: metadata))")
+                // save URL
+                self.imageURL = metadata?.downloadURL()
             }
         }
         
         // Update the progress bar
-        uploadTask.observe(.progress) { (taskSnapshot) in
+        uploadTask.observe(.progress) { [weak self] (taskSnapshot) in
             
+            guard let strongSelf = self else { return }
             guard let progress = taskSnapshot.progress else { return }
-            
+            strongSelf.pvUpload.progress = Float(progress.fractionCompleted)
         }
     }
     
+    //-- jTODO: Add videos later --//
     func uploadMovieToFirebaseStorage(url: NSURL)
     {
         
@@ -126,7 +172,9 @@ class CreateNewViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        //-- jTODO: Add videos later --//
+//        imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        imagePicker.mediaTypes = [kUTTypeImage as String]
         present(imagePicker, animated: true, completion: nil)
     }
 }
@@ -145,11 +193,19 @@ extension CreateNewViewController: UIImagePickerControllerDelegate, UINavigation
         
         if mediaType == (kUTTypeImage as String)    // The user has selected an image
         {
+            //-- Show selected image --
+            if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+            {
+                self.ivPhoto.image = originalImage
+            }
+            //--
+            
             if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage, let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
             {
                 uploadImageToFirebaseStorage(data: imageData)
             }
         }
+            //-- jTODO: Add videos later --//
         else if mediaType == (kUTTypeMovie as String)   // the user has selected a movie
         {
             if let movieURL = info[UIImagePickerControllerMediaURL] as? NSURL

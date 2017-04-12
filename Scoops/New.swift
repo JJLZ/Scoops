@@ -14,13 +14,13 @@ class New: NSObject {
     var text: String
     var author: String
     var authorID: String
-    var imageURL: URL?
+    var imageURL: String
     var longitude: Double?
     var latitude: Double?
     var isPublished: Bool
     var refInCloud: FIRDatabaseReference?
     
-    init(title: String, text: String, author: String, authorID: String ,imageURL: URL?, longitude: Double?, latitude: Double?, isPublished: Bool)
+    init(title: String, text: String, author: String, authorID: String ,imageURL: String, longitude: Double?, latitude: Double?, isPublished: Bool)
     {
         self.refInCloud  = nil
         
@@ -45,11 +45,7 @@ class New: NSObject {
         longitude   = (snapshot?.value as? [String: Any])?["longitude"] as! Double?
         latitude    = (snapshot?.value as? [String: Any])?["latitude"] as! Double?
         isPublished = (snapshot?.value as? [String: Any])?["isPublished"] as! Bool
-        
-        //-- jTODO: Revisar este codigo --//
-        if let path = (snapshot?.value as? [String: Any])?["imageURL"] as! String? {
-            imageURL = URL(string: path)
-        }
+        imageURL    = (snapshot?.value as? [String: Any])?["imageURL"] as! String
     }
 }
 

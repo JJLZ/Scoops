@@ -21,6 +21,7 @@
 		8844AE3F1E9AE30A000325F4 /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8844AE3D1E9AE30A000325F4 /* NewsTableViewCell.xib */; };
 		884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FDE0F1E9487B600C89A8F /* LoginViewController.swift */; };
 		886090641E9889AD00EEE807 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886090631E9889AD00EEE807 /* Utilities.swift */; };
+		88B579F61E9E9556009FC2A6 /* AsyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B579F51E9E9556009FC2A6 /* AsyncData.swift */; };
 		88F989701E9B1488008AEC3D /* ReaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F9896E1E9B1488008AEC3D /* ReaderTableViewCell.swift */; };
 		88F989711E9B1488008AEC3D /* ReaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F9896F1E9B1488008AEC3D /* ReaderTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		8844AE3D1E9AE30A000325F4 /* NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 		884FDE0F1E9487B600C89A8F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		886090631E9889AD00EEE807 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		88B579F51E9E9556009FC2A6 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
 		88F9896E1E9B1488008AEC3D /* ReaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderTableViewCell.swift; sourceTree = "<group>"; };
 		88F9896F1E9B1488008AEC3D /* ReaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 				88430F741E95C0F80096C284 /* Model */,
 				882A265C1E8F45FE00D27BBB /* View */,
 				882A265D1E8F460500D27BBB /* Controller */,
+				88B579F41E9E9543009FC2A6 /* Utils */,
 				882A265E1E8F462600D27BBB /* Resources */,
 			);
 			path = Scoops;
@@ -156,6 +159,14 @@
 				88F9896C1E9AF17F008AEC3D /* Writter */,
 			);
 			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		88B579F41E9E9543009FC2A6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				88B579F51E9E9556009FC2A6 /* AsyncData.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		88F9896C1E9AF17F008AEC3D /* Writter */ = {
@@ -322,6 +333,7 @@
 			files = (
 				88430F731E959DC00096C284 /* NewsViewController.swift in Sources */,
 				884FDE101E9487B600C89A8F /* LoginViewController.swift in Sources */,
+				88B579F61E9E9556009FC2A6 /* AsyncData.swift in Sources */,
 				8844AE3E1E9AE30A000325F4 /* NewsTableViewCell.swift in Sources */,
 				886090641E9889AD00EEE807 /* Utilities.swift in Sources */,
 				88430F761E95C19A0096C284 /* New.swift in Sources */,
