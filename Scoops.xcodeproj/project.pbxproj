@@ -49,6 +49,7 @@
 		884FDE0F1E9487B600C89A8F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		886090631E9889AD00EEE807 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		88B579F51E9E9556009FC2A6 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
+		88BD69361E9FE21D0061B1BA /* Scoops.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scoops.entitlements; sourceTree = "<group>"; };
 		88F9896E1E9B1488008AEC3D /* ReaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderTableViewCell.swift; sourceTree = "<group>"; };
 		88F9896F1E9B1488008AEC3D /* ReaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				882A26491E8F41BC00D27BBB /* AppDelegate.swift */,
+				88BD69371E9FE3480061B1BA /* Entitlements */,
 				882A265F1E8F463300D27BBB /* Supporting Files */,
 			);
 			name = "App Delegate";
@@ -170,6 +172,14 @@
 				88B579F51E9E9556009FC2A6 /* AsyncData.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		88BD69371E9FE3480061B1BA /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				88BD69361E9FE21D0061B1BA /* Scoops.entitlements */,
+			);
+			name = Entitlements;
 			sourceTree = "<group>";
 		};
 		88F9896C1E9AF17F008AEC3D /* Writter */ = {
@@ -244,6 +254,11 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 69A85A3TC3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -468,6 +483,8 @@
 			baseConfigurationReference = 61B7A197B39BECD785C8D891 /* Pods-Scoops.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Scoops/Scoops.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 69A85A3TC3;
 				INFOPLIST_FILE = Scoops/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -483,6 +500,8 @@
 			baseConfigurationReference = 0F9527DFA603592AADE6A1BB /* Pods-Scoops.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Scoops/Scoops.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 69A85A3TC3;
 				INFOPLIST_FILE = Scoops/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
