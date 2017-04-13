@@ -52,12 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        // Here we linked the token device with the servise we will use: Azure, AWS, Parse, Urban...
-        var token = ""
-        for i in 0..<deviceToken.count {
-            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
-        }
-        print(token)
+//        // Here we linked the token device with the servise we will use: Azure, AWS, Parse, Urban...
+//        var token = ""
+//        for i in 0..<deviceToken.count {
+//            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+//        }
+//        print(token)
     }
     
 }
