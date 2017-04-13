@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        //--now Push Notifications --
+        registerPushNotifications()
+        //--
 				
 		// App works offline.
 		FIRDatabase.database().persistenceEnabled = true
@@ -29,28 +34,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         //--
-        
-        // Kind of notifications we will receive: text, sound and badge
-        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.registerForRemoteNotifications()
+
+        //--now --//
+//        // Kind of notifications we will receive: text, sound and badge
+//        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+//        UIApplication.shared.registerForRemoteNotifications()
 		
 		return true
 	}
     
     // MARK: Push notifications
     
+    func registerPushNotifications()
+    {
+        if #available(iOS 10, *) {
+            
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (result, error) in
+                
+            })
+            
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
         // error control
+        print(error.localizedDescription)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        let payload = userInfo as Dictionary
-        print(payload)
+//        let payload = userInfo as Dictionary
+//        print(payload)
+        print(userInfo)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         
 //        // Here we linked the token device with the servise we will use: Azure, AWS, Parse, Urban...
 //        var token = ""
