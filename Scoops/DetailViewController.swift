@@ -57,12 +57,6 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func changeImages(forUpButton imgUp: String, andDownButton imgDown: String)
-    {
-        btnUp?.image = UIImage(named: imgUp)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        btnDown?.image = UIImage(named: imgDown)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-    }
-
     // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
@@ -81,15 +75,21 @@ class DetailViewController: UIViewController {
             }
         }
         
-        //-- Up & Down Buttons --r
-        let imgUp = UIImage(named: "up")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        //-- Up & Down Buttons --
+        let imgUp = UIImage(named: kUp)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         self.btnUp = UIBarButtonItem(image: imgUp, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.btnUpClicked))
         
-        let imgDown = UIImage(named: "down")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let imgDown = UIImage(named: kDown)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         self.btnDown = UIBarButtonItem(image: imgDown, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.btnDownClicked))
 
         self.navigationItem.setRightBarButtonItems([self.btnUp!, self.btnDown!], animated: true)
         //--
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        saveState()
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,6 +97,12 @@ class DetailViewController: UIViewController {
     }
     
     // MARK: Methods
+    
+    func changeImages(forUpButton imgUp: String, andDownButton imgDown: String)
+    {
+        btnUp?.image = UIImage(named: imgUp)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        btnDown?.image = UIImage(named: imgDown)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+    }
     
     func downloadImage(imageURL: URL)
     {
@@ -143,6 +149,19 @@ class DetailViewController: UIViewController {
     {
         lblTitle.text? = new.title
         txtReport.text = new.text
+    }
+    
+    func saveState() {
+        
+        switch state
+        {
+        case .Like:
+            new?.refInCloud?.updateChildValues(["likes": (new!.likes + 1)])
+        case .Dislike:
+            new?.refInCloud?.updateChildValues(["dislikes": (new!.dislikes + 1)])
+        case .Neutral:
+            return
+        }
     }
 }
 

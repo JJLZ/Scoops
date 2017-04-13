@@ -16,6 +16,8 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var lblPublished: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var lblLikes: UILabel!
+    @IBOutlet weak var lblDislikes: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

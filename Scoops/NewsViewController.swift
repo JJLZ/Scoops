@@ -46,7 +46,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.author = getAuthor(fromUser: self.user)
         title = "My Reports"
         
-        observeNews()        
+        observeNews()
     }
     
     deinit {
@@ -77,18 +77,43 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
             }
         })
+        
+        newsRef.queryOrdered(byChild: "authorID").queryEqual(toValue: self.userId).observe(.childChanged, with: { snapshot in
+            
+            if snapshot.childrenCount > 0 {
+                
+                let newChanged = New(snapshot: snapshot)
+                let id: String = (newChanged.refInCloud?.description())!
+                
+                for i in 0..<(self.news.count) {
+                    
+                    if (self.news[i].refInCloud?.description())! == id {
+                        
+                        self.news[i] = newChanged
+                        
+                        DispatchQueue.main.async {
+                            let indexPath = IndexPath(item: i, section: 0)
+                            self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        }
+                        
+                        return
+                    }
+                }
+            }
+        })
+        
     }
     
     // MARK: IBAction's
     
     @IBAction func btnLogoutClicked(_ sender: Any) {
-     
+        
         makeLogout()
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func addNewClicked(_ sender: Any) {
-                
+        
         performSegue(withIdentifier: "showCreateNew", sender: self)
     }
     
@@ -114,6 +139,8 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.lblText?.text = new.text
         cell.lblPublished?.text = (new.isPublished == true) ? "Published" : "Unpublished: tap to publish"
         cell.lblPublished?.textColor = (new.isPublished == true) ? UIColor.black : UIColor.red
+        cell.lblLikes?.text = "\(new.likes)"
+        cell.lblDislikes?.text = "\(new.dislikes)"
         
         // Image for the new
         if new.imageURL != "" {
@@ -131,7 +158,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cellHeight
     }
-        
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -147,7 +174,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let saveAction = UIAlertAction(title: "Publish", style: .default, handler: { (alertAction) in
                 
                 selectedItem.refInCloud?.updateChildValues(["isPublished": true])
-        
+                
                 let cell = tableView.cellForRow(at: indexPath) as! NewsTableViewCell
                 cell.lblPublished?.text = "Published"
                 cell.lblPublished?.textColor = UIColor.black

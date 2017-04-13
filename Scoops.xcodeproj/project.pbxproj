@@ -158,8 +158,8 @@
 		8844AE401E9AE734000325F4 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
-				88F9896D1E9B1459008AEC3D /* Reader */,
 				88F9896C1E9AF17F008AEC3D /* Writter */,
+				88F9896D1E9B1459008AEC3D /* Reader */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";

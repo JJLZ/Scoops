@@ -78,8 +78,10 @@ class CreateNewViewController: UIViewController {
                        "isPublished" : false,
                        "longitude"   : 0.5252,
                        "latitude"    : 0.5353,
-                       "imageURL"    : self.urlToString(url: self.imageURL)
-            ] as [String: Any]
+                       "imageURL"    : self.urlToString(url: self.imageURL),
+                        "likes"      : 0,
+                        "dislikes"   : 0
+            ] as [String             : Any]
         
         testRef.setValue(newItem)
         

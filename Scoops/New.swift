@@ -10,17 +10,19 @@ import UIKit
 
 class New: NSObject {
     
-    var title: String
-    var text: String
-    var author: String
-    var authorID: String
-    var imageURL: String
-    var longitude: Double?
-    var latitude: Double?
-    var isPublished: Bool
-    var refInCloud: FIRDatabaseReference?
+    var title       : String
+    var text        : String
+    var author      : String
+    var authorID    : String
+    var imageURL    : String
+    var longitude   : Double?
+    var latitude    : Double?
+    var isPublished : Bool
+    var likes       : Int
+    var dislikes    : Int
+    var refInCloud  : FIRDatabaseReference?
     
-    init(title: String, text: String, author: String, authorID: String ,imageURL: String, longitude: Double?, latitude: Double?, isPublished: Bool)
+    init(title: String, text: String, author: String, authorID: String ,imageURL: String, longitude: Double?, latitude: Double?, isPublished: Bool, likes: Int, dislikes: Int)
     {
         self.refInCloud  = nil
         
@@ -32,20 +34,24 @@ class New: NSObject {
         self.longitude   = longitude
         self.latitude    = latitude
         self.isPublished = isPublished
+        self.likes       = likes
+        self.dislikes    = dislikes
     }
     
     init(snapshot: FIRDataSnapshot?) {
         
         refInCloud  = snapshot?.ref
         
-        title       = (snapshot?.value as? [String: Any])?["title"] as! String
-        text        = (snapshot?.value as? [String: Any])?["text"] as! String
-        author      = (snapshot?.value as? [String: Any])?["author"] as! String
-        authorID    = (snapshot?.value as? [String: Any])?["authorID"] as! String
-        longitude   = (snapshot?.value as? [String: Any])?["longitude"] as! Double?
-        latitude    = (snapshot?.value as? [String: Any])?["latitude"] as! Double?
-        isPublished = (snapshot?.value as? [String: Any])?["isPublished"] as! Bool
-        imageURL    = (snapshot?.value as? [String: Any])?["imageURL"] as! String
+        title       = (snapshot?.value as? [String : Any])?["title"] as! String
+        text        = (snapshot?.value as? [String : Any])?["text"] as! String
+        author      = (snapshot?.value as? [String : Any])?["author"] as! String
+        authorID    = (snapshot?.value as? [String : Any])?["authorID"] as! String
+        longitude   = (snapshot?.value as? [String : Any])?["longitude"] as! Double?
+        latitude    = (snapshot?.value as? [String : Any])?["latitude"] as! Double?
+        isPublished = (snapshot?.value as? [String : Any])?["isPublished"] as! Bool
+        imageURL    = (snapshot?.value as? [String : Any])?["imageURL"] as! String
+        likes       = (snapshot?.value as? [String : Any])?["likes"] as! Int
+        dislikes    = (snapshot?.value as? [String : Any])?["dislikes"] as! Int
     }
 }
 

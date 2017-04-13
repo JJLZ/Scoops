@@ -64,19 +64,7 @@ class ReaderViewController: UIViewController, UITableViewDataSource, UITableView
                     self.tableView.reloadData()
                 }
             }
-        })
-        
-        newsRefHandle = newsRef.queryOrdered(byChild: "isPublished").queryEqual(toValue: true).observe(.childChanged, with: { (snapshot) in
-            
-            if snapshot.childrenCount > 0 {
-                
-                self.news.append(New(snapshot: snapshot))
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        })
+        })        
     }
     
     // MARK: UITableViewDataSource
