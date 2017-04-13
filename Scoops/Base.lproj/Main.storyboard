@@ -406,7 +406,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fJs-EV-1UE">
                                 <rect key="frame" x="16" y="80" width="343" height="587"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhu-NX-w1r" userLabel="lblTitle">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhu-NX-w1r" userLabel="lblTitle">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="OYp-QA-Jve"/>
@@ -442,7 +442,7 @@
                                             <constraint firstItem="KkN-4f-i1g" firstAttribute="centerX" secondItem="gWy-8D-05G" secondAttribute="centerX" id="w2J-sa-TEJ"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="de donde sacan ustedes esta informacion, y lo que me revela este" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lP5-MU-Ixk" userLabel="txtReport">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="de donde sacan ustedes esta informacion, y lo que me revela este" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lP5-MU-Ixk" userLabel="txtReport">
                                         <rect key="frame" x="0.0" y="207" width="343" height="380"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="16"/>
@@ -459,6 +459,7 @@
                             <constraint firstItem="fJs-EV-1UE" firstAttribute="top" secondItem="r9o-2S-t67" secondAttribute="bottom" constant="16" id="sB8-uc-XSA"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vCe-uY-0eH"/>
                     <connections>
                         <outlet property="ivPhoto" destination="Grq-gJ-zaj" id="sGm-ui-P1J"/>
                         <outlet property="lblTitle" destination="rhu-NX-w1r" id="8rz-0U-8Te"/>

@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum newState {
+    case Neutral
+    case Like
+    case Dislike
+}
+
 class DetailViewController: UIViewController {
     
     // MARK: IBOutlet's
@@ -17,13 +23,52 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var vImage: UIView!
     
+    // MARK: Constant
+    let kUp           = "up"
+    let kDown         = "down"
+    let kUpSelected   = "upSelected"
+    let kDownSelected = "downSelected"
+    
+    var btnUp   : UIBarButtonItem?  = nil
+    var btnDown : UIBarButtonItem?  = nil
+    
     // MARK: Properties
     var new: New? = nil
+    
+    var state: newState = .Neutral {
+        
+        willSet (newValue) {
+            
+            switch newValue
+            {
+            case .Like:
+                self.changeImages(forUpButton: kUpSelected, andDownButton: kDown)
+            
+            case .Dislike:
+                self.changeImages(forUpButton: kUp, andDownButton: kDownSelected)
+                
+            case .Neutral:
+                self.changeImages(forUpButton: kUp, andDownButton: kDown)
+            }
+        }
+        
+        didSet (newValue) {
+            
+        }
+    }
+    
+    func changeImages(forUpButton imgUp: String, andDownButton imgDown: String)
+    {
+        btnUp?.image = UIImage(named: imgUp)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        btnDown?.image = UIImage(named: imgDown)!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+    }
 
     // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //-- jTODO: embed in scrollview --//
         
         if let currentReport = self.new {
             
@@ -31,14 +76,20 @@ class DetailViewController: UIViewController {
             
             if currentReport.imageURL != "" {
                 downloadImage(imageURL: URL(string: currentReport.imageURL)!)
-            }
-            else {
+            } else {
                 spinner.isHidden = true
-//                vImage.frame.size.height = 0
-//                ivPhoto.frame.size.height = 0
-//                spinner.frame.size.height = 0
             }
         }
+        
+        //-- Up & Down Buttons --r
+        let imgUp = UIImage(named: "up")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        self.btnUp = UIBarButtonItem(image: imgUp, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.btnUpClicked))
+        
+        let imgDown = UIImage(named: "down")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        self.btnDown = UIBarButtonItem(image: imgDown, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.btnDownClicked))
+
+        self.navigationItem.setRightBarButtonItems([self.btnUp!, self.btnDown!], animated: true)
+        //--
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +117,26 @@ class DetailViewController: UIViewController {
         
         asyncData.delegate = self
         ivPhoto.image = UIImage(data: asyncData.data)
+    }
+    
+    func btnUpClicked() {
+        
+        if state == .Like {
+            state = .Neutral
+            return
+        }
+        
+        state = newState.Like
+    }
+    
+    func btnDownClicked() {
+        
+        if state == .Dislike {
+            state = .Neutral
+            return
+        }
+        
+        state = newState.Dislike
     }
     
     func showReport(new: New)
